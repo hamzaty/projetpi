@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recompense{% endblock %}
+
+{% block body %}
+    <h1>Recompense</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ recompense.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ recompense.nom }}</td>
+            </tr>
+            <tr>
+                <th>Valeur</th>
+                <td>{{ recompense.valeur }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ recompense.description }}</td>
+            </tr>
+            <tr>
+                <th>Disponibilite</th>
+                <td>{{ recompense.disponibilite ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ recompense.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_recompense_index') }}">back to list</a>
+
+    <a href="{{ path('app_recompense_edit', {'id': recompense.id}) }}">edit</a>
+
+    {{ include('recompense/_delete_form.html.twig') }}
+{% endblock %}

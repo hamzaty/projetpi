@@ -1,0 +1,12 @@
+{# templates/admin/event/list.html.twig #}
+<h1>Events</h1>
+<a href="{{ path('admin_event_create') }}">Create New Event</a>
+<ul>
+    {% for event in events %}
+        <li>
+            {{ event.name }} - {{ event.date|date('Y-m-d') }} ({{ event.nbrparticipants }} participants)
+            <a href="{{ path('admin_event_edit', { id: event.id }) }}">Edit</a>
+            <a href="{{ path('admin_event_delete', { id: event.id }) }}" onclick="return confirm('Are you sure?')">Delete</a>
+        </li>
+    {% endfor %}
+</ul>

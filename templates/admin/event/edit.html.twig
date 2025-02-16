@@ -1,0 +1,9 @@
+{# templates/admin/event/edit.html.twig #}
+<h1>Edit Event</h1>
+{{ form_start(form) }}
+{{ form_row(form.name) }}
+{{ form_row(form.nbrparticipants) }}
+{{ form_row(form.date) }}
+{{ form_row(form.place) }}
+<button type="submit">Save Changes</button>
+{{ form_end(form) }}

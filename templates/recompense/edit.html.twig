@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Recompense{% endblock %}
+
+{% block body %}
+    <h1>Edit Recompense</h1>
+
+    {{ include('recompense/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_recompense_index') }}">back to list</a>
+
+    {{ include('recompense/_delete_form.html.twig') }}
+{% endblock %}

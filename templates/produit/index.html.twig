@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mb-5">Nos Produits</h1>
+
+    <div class="row">
+        {% for produit in produits %}
+            <div class="col-md-3 mb-4"> <!-- Réduire la largeur des colonnes -->
+                <div class="card shadow-sm h-100">
+                    <div class="card-img-top-container text-center p-2"> <!-- Réduire le padding -->
+                        <img src="{{ asset('uploads/images/' ~ produit.image) }}" class="card-img-top img-fluid" alt="{{ produit.type }}" style="max-height: 150px; width: auto;"> <!-- Réduire la hauteur de l'image -->
+                    </div>
+                    <div class="card-body d-flex flex-column p-3"> <!-- Réduire le padding -->
+                        <h5 class="card-title" style="font-size: 1.1rem;">{{ produit.type }}</h5> <!-- Réduire la taille du titre -->
+                        <p class="card-text" style="font-size: 0.9rem;"> <!-- Réduire la taille du texte -->
+                            <strong>Ecopoints:</strong> {{ produit.ecopoint }} <br>
+                            <strong>Quantité:</strong> {{ produit.quantite }} <br>
+                            <strong>Description:</strong> {{ produit.description }}
+                        </p>
+                        <div class="mt-auto d-flex justify-content-between">
+                            <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-warning btn-sm">Modifier</a> <!-- Bouton plus petit -->
+                            <form action="{{ path('app_produit_delete', {'id': produit.id}) }}" method="POST" style="display: inline;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ produit.id) }}">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')">Supprimer</button> <!-- Bouton plus petit -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p class="text-center">Aucun produit trouvé.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ path('app_produit_new') }}" class="btn btn-primary">Créer un nouveau produit</a>
+    </div>
+
+    <style>
+        /* Card Styling */
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 100%; /* Empêche la carte d'être trop large */
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* Réduire l'effet de survol */
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Ombre plus légère */
+        }
+
+        /* Image container */
+        .card-img-top-container {
+            background-color: #f8f9fa; /* Light background for the image */
+            border-bottom: 1px solid #e9ecef; /* Separator */
+        }
+
+        .card-img-top {
+            max-height: 150px; /* Réduire la hauteur de l'image */
+            width: auto; /* Garde le ratio de l'image */
+            margin: 0 auto; /* Centre l'image */
+        }
+
+        .card-body {
+            padding: 15px; /* Réduire le padding */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.1rem; /* Réduire la taille du titre */
+            font-weight: bold;
+        }
+
+        .card-text {
+            font-size: 0.9rem; /* Réduire la taille du texte */
+            color: #6c757d;
+            margin-bottom: 15px; /* Réduire la marge */
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 767px) {
+            .card {
+                margin-bottom: 15px; /* Réduire la marge */
+            }
+
+            .card-img-top {
+                max-height: 120px; /* Réduire la taille de l'image sur les petits écrans */
+            }
+
+            .btn {
+                width: 48%; /* Agrandir les boutons sur les petits écrans */
+            }
+        }
+    </style>
+{% endblock %}
